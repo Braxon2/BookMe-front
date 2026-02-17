@@ -1,0 +1,64 @@
+/* Page-level container */
+.page {
+  padding: 2rem 1rem;
+}
+
+/* Form container */
+.form-card {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+}
+
+/* Title */
+.form-title {
+  margin-bottom: 2rem;
+}
+
+/* Form field */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+/* Facilities */
+.facilities {
+  border: none;
+  margin-bottom: 2rem;
+}
+
+.facilities-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+}
+
+.facility-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* Button */
+.submit-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .facilities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,56 @@
+form {
+  width: 100%;
+}
+
+.container {
+  width: 800px;
+  height: 600px;
+  margin: 50px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-container {
+  display: block;
+  height: 35px;
+  margin: 5px;
+}
+
+.input-container p {
+  font-size: 1.5rem;
+}
+
+.input-container input {
+  width: 100%;
+  height: 20px;
+  font-size: 1.4rem;
+}
+
+@media (max-width: 780px) {
+  .hamburger-menu span {
+    width: 20px;
+    height: 3px;
+    border: 2px solid;
+    background-color: white;
+    margin: 5px;
+  }
+
+  .hamburger-menu {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .container {
+    width: 90%;
+    margin: 50px auto;
+    max-width: 400px;
+    height: auto;
+    min-height: 350px;
+  }
+
+  .input-container {
+    display: block;
+    height: auto;
+  }
+}
