@@ -9,6 +9,7 @@ import AddProperty from "./pages/AddProperty";
 import ListingProperties from "./pages/ListingProperties";
 import ListingUnits from "./pages/ListingUnits";
 import ListingFascilities from "./pages/ListingFascilities";
+import PropertyImages from "./pages/PropertyImages";
 function App() {
   return (
     <BrowserRouter>
@@ -25,6 +26,10 @@ function App() {
           element={<ListingUnits />}
         />
         <Route path="/fascilities" element={<ListingFascilities />} />
+        <Route
+          path="/properties/:propertyId/images"
+          element={<PropertyImages />}
+        />
       </Routes>
     </BrowserRouter>
   );

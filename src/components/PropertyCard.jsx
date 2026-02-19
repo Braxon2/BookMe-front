@@ -6,6 +6,10 @@ const PropertyCard = ({ property }) => {
   const navigateToUnits = () => {
     navigate(`/properties/${property.id}/units`);
   };
+
+  const navigateToPropertyImages = () => {
+    navigate(`/properties/${property.id}/images`);
+  };
   return (
     <div className="property-card">
       <div className="property-image">
@@ -28,6 +32,9 @@ const PropertyCard = ({ property }) => {
         </div>
         <div className="info-field">
           <button onClick={navigateToUnits}>Check Units</button>
+        </div>
+        <div className="info-field">
+          <button onClick={navigateToPropertyImages}>Add Property image</button>
         </div>
       </div>
     </div>

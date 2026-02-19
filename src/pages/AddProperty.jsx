@@ -4,6 +4,7 @@ import { useFetch } from "../hooks/useFetch";
 import usePostProperty from "../hooks/usePostProperty";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const AddProperty = () => {
   const { data: types } = useFetch("http://localhost:8080/api/property-type");
@@ -19,9 +20,7 @@ const AddProperty = () => {
   const [importantInfo, setImportantInfo] = useState("");
   const [fascilities, setFascilities] = useState([]);
 
-  // const handleChange = (event) => {
-  //   setType(event.target.value);
-  // };
+  const navigate = useNavigate();
 
   const propertyForCreation = {
     name,
@@ -136,6 +135,7 @@ const AddProperty = () => {
         <button className="submit-btn" disabled={isLoading}>
           Add property
         </button>
+
         {error && <div className="error">{error}</div>}
         {data && <div className="error">{data.name}</div>}
       </form>

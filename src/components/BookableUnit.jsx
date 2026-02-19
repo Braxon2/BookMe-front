@@ -31,17 +31,6 @@ const BookableUnit = ({ bookableUnit }) => {
       </div>
     </div>
   );
-  /*
-   "id": 2,
-        "maxCapacity": 2,
-        "squareMeters": 25.6,
-        "totalUnits": 4,
-        "singleBeds": 0,
-        "doubleBeds": 1,
-        "maxAdultCapacity": 2,
-        "maxKidsCapacity": 1,
-        "name": "Studio A
-  */
 };
 
 export default BookableUnit;
