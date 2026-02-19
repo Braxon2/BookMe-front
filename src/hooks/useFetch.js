@@ -8,7 +8,7 @@ const useFetch = (url) => {
   const [error, setError] = useState(null);
 
   const fetchData = async () => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated || !url) {
       setData(null);
       return;
     }

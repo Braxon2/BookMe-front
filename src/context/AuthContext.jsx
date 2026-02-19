@@ -6,6 +6,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isOwner, setIsOwner] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -18,6 +19,7 @@ export const AuthProvider = ({ children }) => {
       setUser({ id: userId, role: userType });
       setIsAuthenticated(true);
       setIsAdmin(userType === "ADMIN");
+      setIsOwner(userType === "OWNER");
     }
   }, []);
 
@@ -39,12 +41,13 @@ export const AuthProvider = ({ children }) => {
       }
 
       localStorage.setItem("jwtToken", json.token);
-      localStorage.setItem("userType", json.role);
+      localStorage.setItem("userType", json.userType);
       localStorage.setItem("userId", json.id);
 
-      setUser({ id: json.id, role: json.role });
+      setUser({ id: json.id, role: json.userType });
       setIsAuthenticated(true);
-      setIsAdmin(json.role === "ADMIN");
+      setIsAdmin(json.userType === "ADMIN");
+      setIsOwner(json.userType === "OWNER");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -65,6 +68,7 @@ export const AuthProvider = ({ children }) => {
         user,
         isAuthenticated,
         isAdmin,
+        isOwner,
         isLoading,
         error,
         login,

@@ -2,7 +2,7 @@ import "./styles/Navbar.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 const Navbar = () => {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, isOwner, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -23,20 +23,33 @@ const Navbar = () => {
         <Link to="/profile">
           <li>Profile</li>
         </Link>
-        <Link to="/add-property">
-          <li>Add Property</li>
-        </Link>
-        <Link to="/" onClick={handleLogout}>
-          <li>Log out</li>
-        </Link>
+        {isOwner && (
+          <Link to="/list-properties">
+            <li>List your properties</li>
+          </Link>
+        )}
+        {isOwner && (
+          <Link to="/add-property">
+            <li>Add Property</li>
+          </Link>
+        )}
+        {isAuthenticated && (
+          <Link to="/" onClick={handleLogout}>
+            <li>Log out</li>
+          </Link>
+        )}
 
-        <Link to="/login">
-          <li>Login</li>
-        </Link>
+        {!isAuthenticated && (
+          <Link to="/login">
+            <li>Login</li>
+          </Link>
+        )}
 
-        <Link to="/register">
-          <li>Register</li>
-        </Link>
+        {!isAuthenticated && (
+          <Link to="/register">
+            <li>Register</li>
+          </Link>
+        )}
 
         <div className="hamburger-menu">
           <span></span>

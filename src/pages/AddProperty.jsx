@@ -3,6 +3,7 @@ import Facilities from "../components/Facilities";
 import { useFetch } from "../hooks/useFetch";
 import usePostProperty from "../hooks/usePostProperty";
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 const AddProperty = () => {
   const { data: types } = useFetch("http://localhost:8080/api/property-type");
@@ -18,9 +19,9 @@ const AddProperty = () => {
   const [importantInfo, setImportantInfo] = useState("");
   const [fascilities, setFascilities] = useState([]);
 
-  const handleChange = (event) => {
-    setType(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setType(event.target.value);
+  // };
 
   const propertyForCreation = {
     name,

@@ -6,6 +6,8 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Search from "./pages/Search";
 import AddProperty from "./pages/AddProperty";
+import ListingProperties from "./pages/ListingProperties";
+import ListingUnits from "./pages/ListingUnits";
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +18,11 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/search" element={<Search />} />
         <Route path="/add-property" element={<AddProperty />} />
+        <Route path="/list-properties" element={<ListingProperties />} />
+        <Route
+          path="/properties/:propertyId/units"
+          element={<ListingUnits />}
+        />
       </Routes>
     </BrowserRouter>
   );
