@@ -52,7 +52,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button disabled={isLoading}>Log in</button>
+        <button>Log in</button>
         {error && <div className="error">{error}</div>}
         {user && <div>{user.id}</div>}
       </form>

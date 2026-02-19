@@ -2,7 +2,7 @@ import "./styles/Navbar.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 const Navbar = () => {
-  const { isAuthenticated, isOwner, logout } = useAuth();
+  const { isAuthenticated, isOwner, isAdmin, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -36,6 +36,17 @@ const Navbar = () => {
         {isAuthenticated && (
           <Link to="/" onClick={handleLogout}>
             <li>Log out</li>
+          </Link>
+        )}
+        {isAdmin && (
+          <Link to="/fascilities">
+            <li>Fascilities</li>
+          </Link>
+        )}
+
+        {isAdmin && (
+          <Link to="/addons">
+            <li>Addons</li>
           </Link>
         )}
 

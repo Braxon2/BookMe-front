@@ -1,9 +1,7 @@
-/* Page-level container */
 .page {
   padding: 2rem 1rem;
 }
 
-/* Form container */
 .form-card {
   max-width: 800px;
   margin: 0 auto;
@@ -12,12 +10,10 @@
   border-radius: 8px;
 }
 
-/* Title */
 .form-title {
   margin-bottom: 2rem;
 }
 
-/* Form field */
 .form-field {
   display: flex;
   flex-direction: column;
@@ -32,7 +28,6 @@
   font-size: 1rem;
 }
 
-/* Facilities */
 .facilities {
   border: none;
   margin-bottom: 2rem;
@@ -50,13 +45,11 @@
   align-items: center;
 }
 
-/* Button */
 .submit-btn {
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .facilities-grid {
     grid-template-columns: repeat(2, 1fr);

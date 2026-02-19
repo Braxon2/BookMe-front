@@ -8,6 +8,7 @@ import Search from "./pages/Search";
 import AddProperty from "./pages/AddProperty";
 import ListingProperties from "./pages/ListingProperties";
 import ListingUnits from "./pages/ListingUnits";
+import ListingFascilities from "./pages/ListingFascilities";
 function App() {
   return (
     <BrowserRouter>
@@ -23,6 +24,7 @@ function App() {
           path="/properties/:propertyId/units"
           element={<ListingUnits />}
         />
+        <Route path="/fascilities" element={<ListingFascilities />} />
       </Routes>
     </BrowserRouter>
   );
