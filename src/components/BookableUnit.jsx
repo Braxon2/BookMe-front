@@ -1,8 +1,18 @@
 import "./styles/BookableUnit.css";
 import image1 from "../assets/images/image1.jpg";
+import { useNavigate } from "react-router-dom";
 const BookableUnit = ({ bookableUnit }) => {
+  const navigate = useNavigate();
+
   const doubleBeds = bookableUnit.doubleBeds;
   const singleBeds = bookableUnit.singleBeds;
+
+  const unitId = bookableUnit.id;
+
+  const navigateToUnitFacilities = (e) => {
+    e.preventDefault();
+    navigate(`/units/${unitId}/unit-fascilities`);
+  };
   return (
     <div className="unit-card">
       <div className="unit-image">
@@ -28,6 +38,11 @@ const BookableUnit = ({ bookableUnit }) => {
             <p>Single beds: {bookableUnit.singleBeds}</p>
           </div>
         ) : null}
+        <div className="flex-buttons">
+          <button>Add Image</button>
+          <button onClick={navigateToUnitFacilities}>Add Unit fasility</button>
+          <button>Add period price</button>
+        </div>
       </div>
     </div>
   );

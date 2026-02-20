@@ -10,6 +10,9 @@ import ListingProperties from "./pages/ListingProperties";
 import ListingUnits from "./pages/ListingUnits";
 import ListingFascilities from "./pages/ListingFascilities";
 import PropertyImages from "./pages/PropertyImages";
+import AddUnit from "./pages/AddUnit";
+import ListingUnitFacilties from "./pages/ListingUnitFacilties";
+import AddUnitFacilityToUnit from "./pages/AddUnitFacilityToUnit";
 function App() {
   return (
     <BrowserRouter>
@@ -26,10 +29,16 @@ function App() {
           element={<ListingUnits />}
         />
         <Route path="/fascilities" element={<ListingFascilities />} />
+        <Route path="/unit-fascilities" element={<ListingUnitFacilties />} />
+        <Route
+          path="/units/:unitId/unit-fascilities"
+          element={<AddUnitFacilityToUnit />}
+        />
         <Route
           path="/properties/:propertyId/images"
           element={<PropertyImages />}
         />
+        <Route path="/properties/:propertyId/add-unit" element={<AddUnit />} />
       </Routes>
     </BrowserRouter>
   );

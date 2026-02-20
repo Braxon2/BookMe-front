@@ -8,12 +8,12 @@ const usePostProperty = () => {
 
   const { user } = useAuth();
 
-  const postProperty = async (propertyForCreation) => {
+  const postProperty = async (link, propertyForCreation) => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const res = await fetch("http://localhost:8080/api/properties", {
+      const res = await fetch(link, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
@@ -25,7 +25,12 @@ const usePostProperty = () => {
       const json = await res.json();
 
       if (!res.ok) {
-        throw new Error(json.error || "Property creation failed.");
+        const errorData = await res.json().catch(() => ({
+          message: "An unexpected error occurred",
+        }));
+        throw new Error(
+          errorData.message || `Error ${res.status}: ${res.statusText}`,
+        );
       }
 
       setData(json);

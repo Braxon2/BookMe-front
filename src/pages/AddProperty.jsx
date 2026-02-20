@@ -38,7 +38,10 @@ const AddProperty = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await postProperty(propertyForCreation);
+    await postProperty(
+      "http://localhost:8080/api/properties",
+      propertyForCreation,
+    );
   };
   return (
     <div className="page">

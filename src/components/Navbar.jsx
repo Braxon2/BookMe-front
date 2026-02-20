@@ -45,6 +45,12 @@ const Navbar = () => {
         )}
 
         {isAdmin && (
+          <Link to="/unit-fascilities">
+            <li>Unit Facilities</li>
+          </Link>
+        )}
+
+        {isAdmin && (
           <Link to="/addons">
             <li>Addons</li>
           </Link>

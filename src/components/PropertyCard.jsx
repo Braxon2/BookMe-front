@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "./styles/PropertyCard.css";
+import { useFetch } from "../hooks/useFetch";
+import notFound from "../assets/images/Image-not-found.png";
 const PropertyCard = ({ property }) => {
   const navigate = useNavigate();
 
@@ -10,10 +12,15 @@ const PropertyCard = ({ property }) => {
   const navigateToPropertyImages = () => {
     navigate(`/properties/${property.id}/images`);
   };
+
+  const { data: thumbnail } = useFetch(
+    `http://localhost:8080/api/properties/${property.id}/thumbnail`,
+  );
+  console.log("Thumbnail data:", thumbnail);
   return (
     <div className="property-card">
       <div className="property-image">
-        <img src="src/assets/images/prop1.jpeg" alt="not found" />
+        <img src={thumbnail?.url || notFound} alt="not found" />
       </div>
       <div className="property-info">
         <div className="info-field">
