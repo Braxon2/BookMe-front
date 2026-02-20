@@ -22,7 +22,13 @@ const useImageUpload = () => {
       });
 
       if (!res.ok) {
-        throw new Error("Failed to upload image. Please try again.");
+        const errorData = await res.json().catch(() => ({
+          message: "An unexpected error occurred",
+        }));
+
+        throw new Error(
+          errorData.message || `Error ${res.status}: ${res.statusText}`,
+        );
       }
 
       const rawText = await res.text();
