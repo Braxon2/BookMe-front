@@ -13,6 +13,11 @@ const BookableUnit = ({ bookableUnit }) => {
     e.preventDefault();
     navigate(`/units/${unitId}/unit-fascilities`);
   };
+
+  const navigateToPeriodPrice = (e) => {
+    e.preventDefault();
+    navigate(`/units/${unitId}/add-price`);
+  };
   return (
     <div className="unit-card">
       <div className="unit-image">
@@ -41,7 +46,7 @@ const BookableUnit = ({ bookableUnit }) => {
         <div className="flex-buttons">
           <button>Add Image</button>
           <button onClick={navigateToUnitFacilities}>Add Unit fasility</button>
-          <button>Add period price</button>
+          <button onClick={navigateToPeriodPrice}>Add period price</button>
         </div>
       </div>
     </div>

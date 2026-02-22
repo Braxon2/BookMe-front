@@ -13,6 +13,7 @@ import PropertyImages from "./pages/PropertyImages";
 import AddUnit from "./pages/AddUnit";
 import ListingUnitFacilties from "./pages/ListingUnitFacilties";
 import AddUnitFacilityToUnit from "./pages/AddUnitFacilityToUnit";
+import AddPeriodPriceUnit from "./pages/AddPeriodPriceUnit";
 function App() {
   return (
     <BrowserRouter>
@@ -39,6 +40,10 @@ function App() {
           element={<PropertyImages />}
         />
         <Route path="/properties/:propertyId/add-unit" element={<AddUnit />} />
+        <Route
+          path="/units/:unitId/add-price"
+          element={<AddPeriodPriceUnit />}
+        />
       </Routes>
     </BrowserRouter>
   );
