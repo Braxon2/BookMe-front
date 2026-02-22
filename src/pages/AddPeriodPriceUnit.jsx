@@ -14,16 +14,6 @@ const AddPeriodPriceUnit = () => {
 
   const { data: priceDates } = useFetch(
     unitId ? `http://localhost:8080/api/units/${unitId}/period-prices` : null,
-    {
-      onError: (err) => {
-        console.error("Fetch error:", err);
-        console.error("Response status:", err.status);
-        console.error("Response headers:", err.response?.headers);
-      },
-      onSuccess: (data) => {
-        console.log("Fetch successful:", data);
-      },
-    },
   );
 
   const periodPriceToAdd = {
@@ -48,7 +38,6 @@ const AddPeriodPriceUnit = () => {
     <div className="page-prices">
       <div className="price-layout">
         <DatePickerInput
-          // minDate={"2026 02 22"}
           valueFormat="YYYY MMMM DD"
           type="range"
           placeholder="Choose a date range"
@@ -95,7 +84,12 @@ const AddPeriodPriceUnit = () => {
                 <div>
                   <div>{dayjs(date).date()}</div>
                   {priceForDate && (
-                    <Text size="xs" c="blue" style={{ fontSize: "8px" }}>
+                    <Text
+                      size="xs"
+                      c="blue"
+                      fw={"700"}
+                      style={{ fontSize: "8px" }}
+                    >
                       ${priceForDate.pricePerNight}
                     </Text>
                   )}
