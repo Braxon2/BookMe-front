@@ -12,9 +12,29 @@ const Search = () => {
   const [adults, setAdults] = useState(1);
   const [kids, setKids] = useState(0);
 
-  const [searchUrl, setSearchUrl] = useState(null);
-
+  const [maxPrice, setMaxPrice] = useState("");
+  const [selectedPropFacs, setSelectedPropFacs] = useState([]);
+  const [selectedUnitFacs, setSelectedUnitFacs] = useState([]);
   const [units, setUnits] = useState(null);
+
+  const { data: propFacilities } = useFetch(
+    "http://localhost:8080/api/fascilities",
+  );
+  const { data: unitFacilities } = useFetch(
+    "http://localhost:8080/api/unit-fascilities",
+  );
+
+  const handlePropFacToggle = (id) => {
+    setSelectedPropFacs((prev) =>
+      prev.includes(id) ? prev.filter((facId) => facId !== id) : [...prev, id],
+    );
+  };
+
+  const handleUnitFacToggle = (id) => {
+    setSelectedUnitFacs((prev) =>
+      prev.includes(id) ? prev.filter((facId) => facId !== id) : [...prev, id],
+    );
+  };
 
   const handleDateChange = (dates) => {
     setValue(dates);
@@ -23,8 +43,17 @@ const Search = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const url = `http://localhost:8080/api/units/search?city=${city}&country=${country}&adults=${adults}&kids=${kids}&startDate=${value[0]}&endDate=${value[1]}`;
+    let url = `http://localhost:8080/api/units/search?city=${city}&country=${country}&adults=${adults}&kids=${kids}&startDate=${value[0]}&endDate=${value[1]}`;
 
+    if (maxPrice) {
+      url += `&maxPrice=${maxPrice}`;
+    }
+    if (selectedPropFacs.length > 0) {
+      url += `&propertyFacilities=${selectedPropFacs.join(",")}`;
+    }
+    if (selectedUnitFacs.length > 0) {
+      url += `&unitFacilities=${selectedUnitFacs.join(",")}`;
+    }
     try {
       const token = localStorage.getItem("jwtToken");
 
@@ -113,6 +142,50 @@ const Search = () => {
             value={kids}
             onChange={(e) => setKids(parseInt(e.target.value) || 0)}
           />
+        </div>
+
+        <div className="input-container">
+          <p>Max Price</p>
+          <input
+            type="number"
+            placeholder="Enter max price"
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(e.target.value)}
+            min="0"
+            step="0.01"
+          />
+        </div>
+
+        <div className="checkbox-section">
+          <p>Property Facilities</p>
+          <div className="checkbox-grid">
+            {propFacilities?.map((fac) => (
+              <label key={`prop-${fac.id}`} className="checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={selectedPropFacs.includes(fac.id)}
+                  onChange={() => handlePropFacToggle(fac.id)}
+                />
+                {fac.name}
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div className="checkbox-section">
+          <p>Unit Facilities</p>
+          <div className="checkbox-grid">
+            {unitFacilities?.map((fac) => (
+              <label key={`unit-${fac.id}`} className="checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={selectedUnitFacs.includes(fac.id)}
+                  onChange={() => handleUnitFacToggle(fac.id)}
+                />
+                {fac.name}
+              </label>
+            ))}
+          </div>
         </div>
         <div className="input-container">
           <button>Search</button>
