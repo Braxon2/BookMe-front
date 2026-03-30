@@ -25,6 +25,10 @@ const AddUnitFacilityToUnit = () => {
     console.log(unitFacilities);
   };
 
+  {
+    unitFacilities?.map((unitFacility) => console.log(unitFacility.name));
+  }
+
   const handleSelectedBox = (checked, id) => {
     if (checked) {
       setSelectedFacilties((prev) => [...prev, id]);

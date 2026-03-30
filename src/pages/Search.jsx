@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 import BookableUnitCard from "../components/BookableUnitCard";
 import "./styles/Search.css";
+import GuestDropdown from "../components/GuestDropdown";
 
 const Search = () => {
   const [value, setValue] = useState([null, null]);
@@ -76,9 +77,6 @@ const Search = () => {
     <div className="container">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
-          <p>City</p>
-        </div>
-        <div className="input-container">
           <input
             type="text"
             name="city"
@@ -87,9 +85,6 @@ const Search = () => {
             value={city}
             onChange={(e) => setCity(e.target.value)}
           />
-        </div>
-        <div className="input-container">
-          <p>Country</p>
         </div>
         <div className="input-container">
           <input
@@ -101,9 +96,7 @@ const Search = () => {
             onChange={(e) => setCountry(e.target.value)}
           />
         </div>
-        <div className="input-container">
-          <p>Choose A Date For Check In</p>
-        </div>
+
         <div className="input-container">
           <DatePickerInput
             valueFormat="YYYY MMMM DD"
@@ -113,38 +106,17 @@ const Search = () => {
             onChange={handleDateChange}
           />
         </div>
-        <div className="input-container">
-          <p>Number of Guests</p>
-        </div>
-        <div className="input-container">
-          <label htmlFor="adults">Adults: </label>
-          <input
-            type="number"
-            name="adults"
-            id="adults"
-            min="1"
-            max="10"
-            value={adults}
-            onChange={(e) => setAdults(parseInt(e.target.value) || 1)}
-          />
-        </div>
-        <div className="input-container">
-          <p>Number of Kids</p>
-        </div>
-        <div className="input-container">
-          <label htmlFor="adults">Kids: </label>
-          <input
-            type="number"
-            name="kids"
-            id="kids"
-            min="0"
-            max="10"
-            value={kids}
-            onChange={(e) => setKids(parseInt(e.target.value) || 0)}
-          />
-        </div>
 
-        <div className="input-container">
+        {/* <div className="input-container guests-input-container">
+          <GuestDropdown
+            adults={adults}
+            setAdults={setAdults}
+            kids={kids}
+            setKids={setKids}
+          />
+        </div> */}
+
+        {/* <div className="input-container">
           <p>Max Price</p>
           <input
             type="number"
@@ -154,9 +126,9 @@ const Search = () => {
             min="0"
             step="0.01"
           />
-        </div>
+        </div> */}
 
-        <div className="checkbox-section">
+        {/* <div className="checkbox-section">
           <p>Property Facilities</p>
           <div className="checkbox-grid">
             {propFacilities?.map((fac) => (
@@ -170,9 +142,9 @@ const Search = () => {
               </label>
             ))}
           </div>
-        </div>
+        </div> */}
 
-        <div className="checkbox-section">
+        {/* <div className="checkbox-section">
           <p>Unit Facilities</p>
           <div className="checkbox-grid">
             {unitFacilities?.map((fac) => (
@@ -189,10 +161,10 @@ const Search = () => {
         </div>
         <div className="input-container">
           <button>Search</button>
-        </div>
+        </div> */}
       </form>
 
-      <div className="property-list">
+      {/* <div className="property-list">
         <div className="input-container"></div>
         <h2>Found units:</h2>
       </div>
@@ -200,7 +172,7 @@ const Search = () => {
         {units?.map((unit) => (
           <BookableUnitCard key={unit.unitId} bookableUnit={unit} />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

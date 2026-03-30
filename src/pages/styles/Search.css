@@ -10,11 +10,11 @@ form {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  flex-direction: column;
+  /* flex-direction: column; */
 }
 
 .input-container {
-  display: block;
+  display: inline-block;
   height: 35px;
   margin: 5px;
 }
@@ -24,7 +24,8 @@ form {
 }
 
 .input-container input {
-  width: 100%;
+  /* width: 100%; */
+  width: 100px;
   height: 20px;
   font-size: 1.4rem;
 }

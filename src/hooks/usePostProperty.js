@@ -25,11 +25,8 @@ const usePostProperty = () => {
       const json = await res.json();
 
       if (!res.ok) {
-        const errorData = await res.json().catch(() => ({
-          message: "An unexpected error occurred",
-        }));
         throw new Error(
-          errorData.message || `Error ${res.status}: ${res.statusText}`,
+          json.message || `Error ${res.status}: ${res.statusText}`,
         );
       }
 
