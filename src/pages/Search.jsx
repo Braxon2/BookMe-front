@@ -107,14 +107,14 @@ const Search = () => {
           />
         </div>
 
-        {/* <div className="input-container guests-input-container">
+        <div className="input-container">
           <GuestDropdown
             adults={adults}
             setAdults={setAdults}
             kids={kids}
             setKids={setKids}
           />
-        </div> */}
+        </div>
 
         {/* <div className="input-container">
           <p>Max Price</p>
@@ -159,9 +159,10 @@ const Search = () => {
             ))}
           </div>
         </div>
+        */}
         <div className="input-container">
           <button>Search</button>
-        </div> */}
+        </div>
       </form>
 
       {/* <div className="property-list">
