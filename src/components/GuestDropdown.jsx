@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./styles/GuestDropdown.css";
 const GuestDropdown = ({ adults, setAdults, kids, setKids }) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
   const label = `Adults ${adults} · Kids ${kids}`;
