@@ -73,10 +73,12 @@ const AddPeriodPriceUnit = () => {
 
               const dateStr = dayjs(date).format("YYYY-MM-DD");
 
-              const priceForDate = priceDates?.find((p) => {
+              const priceForDate = priceDates?.findLast((p) => {
                 return (
-                  currentDate.isAfter(p.startDate) &&
-                  currentDate.isBefore(p.endDate)
+                  (currentDate.isAfter(p.startDate) ||
+                    currentDate.isSame(p.startDate)) &&
+                  (currentDate.isBefore(p.endDate) ||
+                    currentDate.isSame(p.endDate))
                 );
               });
 

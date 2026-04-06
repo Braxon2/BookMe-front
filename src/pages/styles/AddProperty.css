@@ -8,6 +8,10 @@
   padding: 2rem;
   background: white;
   border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .form-title {
@@ -17,9 +21,14 @@
 .form-field {
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 0.5rem;
   margin-bottom: 1.5rem;
 }
+
+/* .form-field label {
+  text-align: center;
+} */
 
 .form-field input,
 .form-field textarea,

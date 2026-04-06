@@ -1,33 +1,41 @@
 form {
   width: 100%;
-  display: block;
+  /* display: block; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .container {
   width: 800px;
   height: auto;
   margin: 50px auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  /* flex-direction: column; */
+  flex: auto;
+  flex-direction: column;
 }
 
 .input-container {
-  display: inline-block;
+  /* display: inline-block; */
   height: 35px;
   margin: 5px;
 }
 
 .input-container p {
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .input-container input {
   /* width: 100%; */
   width: 100px;
   height: 20px;
-  font-size: 1.4rem;
+  padding: 0 6px;
+  font-size: 0.75rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .checkbox-section {

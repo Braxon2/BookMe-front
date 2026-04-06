@@ -27,7 +27,7 @@ const PropertyCard = ({ property }) => {
           <h2>{property.name}</h2>
         </div>
         <div className="info-field">
-          <p>{property.propertyTypeDTO.id}</p>
+          <p>{property.propertyTypeDTO.name}</p>
         </div>
         <div className="info-field">
           <p>

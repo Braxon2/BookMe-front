@@ -28,12 +28,14 @@ const GuestDropdown = ({ adults, setAdults, kids, setKids }) => {
             <span>Adults: </span>
             <button
               className="circle-button"
+              type="button"
               onClick={() => (adults > 1 ? setAdults(adults - 1) : adults)}
             >
               -
             </button>
             <button
               className="circle-button"
+              type="button"
               onClick={() => setAdults(adults + 1)}
             >
               +
@@ -43,12 +45,14 @@ const GuestDropdown = ({ adults, setAdults, kids, setKids }) => {
             <span>Kids: </span>
             <button
               className="circle-button"
+              type="button"
               onClick={() => (kids > 0 ? setKids(kids - 1) : kids)}
             >
               -
             </button>
             <button
               className="circle-button"
+              type="button"
               onClick={() => (kids >= 0 ? setKids(kids + 1) : kids)}
               kids
             >
