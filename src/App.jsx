@@ -15,6 +15,8 @@ import ListingUnitFacilties from "./pages/ListingUnitFacilties";
 import AddUnitFacilityToUnit from "./pages/AddUnitFacilityToUnit";
 import AddPeriodPriceUnit from "./pages/AddPeriodPriceUnit";
 import SearchWithfilter from "./pages/SearchWithFilters";
+import DetailedBookableUnit from "./pages/DetailedBookableUnit";
+import UserProfile from "./pages/UserProfile";
 function App() {
   return (
     <BrowserRouter>
@@ -49,10 +51,14 @@ function App() {
 
         <Route path="/properties/:propertyId/add-unit" element={<AddUnit />} />
 
+        <Route path="/units/:unitId" element={<DetailedBookableUnit />} />
+
         <Route
           path="/units/:unitId/add-price"
           element={<AddPeriodPriceUnit />}
         />
+
+        <Route path="/profile" element={<UserProfile />} />
       </Routes>
     </BrowserRouter>
   );

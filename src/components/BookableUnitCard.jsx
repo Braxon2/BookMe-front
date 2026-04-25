@@ -1,6 +1,17 @@
-const BookableUnitCard = ({ bookableUnit }) => {
+import { useNavigate } from "react-router-dom";
+
+const BookableUnitCard = ({ bookableUnit, checkIn, checkOut }) => {
+  const navigate = useNavigate();
+
+  const goToUnitPage = (e) => {
+    e.preventDefault();
+    navigate(
+      `/units/${bookableUnit.unitId}?startDate=${checkIn}&endDate=${checkOut}`,
+    );
+  };
+
   return (
-    <div className="unit-card">
+    <div className="unit-card" onClick={goToUnitPage}>
       <div className="unit-image">
         <img src={bookableUnit.imageUrl} alt="unit" />
       </div>
@@ -15,9 +26,6 @@ const BookableUnitCard = ({ bookableUnit }) => {
           <h2>{bookableUnit.totalPriceForStay}</h2>
         </div>
 
-        <div className="info-field">
-          <p>Max capacity: {bookableUnit.maxCapacity}</p>
-        </div>
         {bookableUnit.doubleBeds > 0 ? (
           <div className="info-field">
             <p>Double beds: {bookableUnit.doubleBeds}</p>

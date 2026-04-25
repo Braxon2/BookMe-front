@@ -1,7 +1,6 @@
 import { DatePickerInput } from "@mantine/dates";
 import { useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
-import BookableUnitCard from "../components/BookableUnitCard";
 import "./styles/Search.css";
 import GuestDropdown from "../components/GuestDropdown";
 import { createSearchParams, useNavigate } from "react-router-dom";
@@ -43,51 +42,42 @@ const Search = () => {
   };
 
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit}>
-        <div className="input-container">
-          <input
-            type="text"
-            name="city"
-            id="city"
-            placeholder="Search for city"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
-        </div>
-        <div className="input-container">
-          <input
-            type="text"
-            name="country"
-            id="country"
-            placeholder="Search for country"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-          />
-        </div>
+    <div className="search-container">
+      <form className="search-form" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="city"
+          id="city"
+          placeholder="Search for city"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+        />
 
-        <div className="input-container">
-          <DatePickerInput
-            valueFormat="YYYY MMMM DD"
-            type="range"
-            placeholder="Choose a date range"
-            value={value}
-            onChange={handleDateChange}
-          />
-        </div>
+        <input
+          type="text"
+          name="country"
+          id="country"
+          placeholder="Search for country"
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+        />
 
-        <div className="input-container">
-          <GuestDropdown
-            adults={adults}
-            setAdults={setAdults}
-            kids={kids}
-            setKids={setKids}
-          />
-        </div>
+        <DatePickerInput
+          valueFormat="YYYY MMMM DD"
+          type="range"
+          placeholder="Choose a date range"
+          value={value}
+          onChange={handleDateChange}
+        />
 
-        <div className="input-container">
-          <button>Search</button>
-        </div>
+        <GuestDropdown
+          adults={adults}
+          setAdults={setAdults}
+          kids={kids}
+          setKids={setKids}
+        />
+
+        <button>Search</button>
       </form>
     </div>
   );

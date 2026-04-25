@@ -56,89 +56,75 @@ const Register = () => {
     }
   };
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit}>
-        <div className="input-container">
-          <h2>REGISTER</h2>
-        </div>
-        <div className="input-container">
-          <p>First Name:</p>
-        </div>
-        <div className="input-container">
-          <input
-            type="text"
-            name="firstname"
-            id="firstname"
-            value={firstname}
-            onChange={(e) => setFirstname(e.target.value)}
-          />
-        </div>
-        <div className="input-container">
-          <p>Last Name:</p>
-        </div>
-        <div className="input-container">
-          <input
-            type="text"
-            name="lastname"
-            id="lastname"
-            value={lastname}
-            onChange={(e) => setLastname(e.target.value)}
-          />
-        </div>
-        <div className="input-container">
-          <p>Phone Number:</p>
-        </div>
-        <div className="input-container">
-          <input
-            type="tel"
-            name="phonenumber"
-            id="phonenumber"
-            value={phonenumber}
-            onChange={(e) => setPhonenumber(e.target.value)}
-          />
-        </div>
-        <div className="input-container">
-          <p>Register as:</p>
-        </div>
-        <div className="input-container">
-          <select
-            name="type"
-            id="type"
-            value={userType}
-            onChange={(e) => setUserType(e.target.value)}
-          >
-            <option value="USER">User</option>
-            <option value="OWNER">Owner</option>
-          </select>
-        </div>
+    <div className="register-container">
+      <form className="register-form" onSubmit={handleSubmit}>
+        <h2>REGISTER</h2>
 
-        <div className="input-container">
-          <p>Email:</p>
-        </div>
-        <div className="input-container">
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="ex. email@gmail.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="input-container">
-          <p>Password</p>
-        </div>
-        <div className="input-container">
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+        <p>First Name:</p>
+
+        <input
+          type="text"
+          name="firstname"
+          id="firstname"
+          value={firstname}
+          onChange={(e) => setFirstname(e.target.value)}
+        />
+
+        <p>Last Name:</p>
+
+        <input
+          type="text"
+          name="lastname"
+          id="lastname"
+          value={lastname}
+          onChange={(e) => setLastname(e.target.value)}
+        />
+
+        <p>Phone Number:</p>
+
+        <input
+          type="tel"
+          name="phonenumber"
+          id="phonenumber"
+          value={phonenumber}
+          onChange={(e) => setPhonenumber(e.target.value)}
+        />
+
+        <p>Register as:</p>
+
+        <select
+          name="type"
+          id="type"
+          value={userType}
+          onChange={(e) => setUserType(e.target.value)}
+        >
+          <option value="USER">User</option>
+          <option value="OWNER">Owner</option>
+        </select>
+
+        <p>Email:</p>
+
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="ex. email@gmail.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <p>Password</p>
+
+        <input
+          type="password"
+          name="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
         {error && <div className="error">{error}</div>}
-        <button>Register</button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );

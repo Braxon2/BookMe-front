@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
       setIsAdmin(userType === "ADMIN");
       setIsOwner(userType === "OWNER");
     }
+    setIsLoading(false);
   }, []);
 
   const login = async (email, password) => {

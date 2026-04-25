@@ -2,9 +2,9 @@ import { DatePickerInput } from "@mantine/dates";
 import { useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 import BookableUnitCard from "../components/BookableUnitCard";
-import "./styles/Search.css";
 import GuestDropdown from "../components/GuestDropdown";
 import { useSearchParams } from "react-router-dom";
+import "./styles/SearchWithFilters.css";
 
 const SearchWithfilter = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,17 +16,9 @@ const SearchWithfilter = () => {
   );
   const [kids, setKids] = useState(parseInt(searchParams.get("kids")) || 0);
 
-  const initialStartDate = searchParams.get("startDate")
-    ? searchParams.get("startDate")
-    : null;
-  const initialEndDate = searchParams.get("endDate")
-    ? searchParams.get("endDate")
-    : null;
+  const initialStartDate = searchParams.get("startDate") || null;
+  const initialEndDate = searchParams.get("endDate") || null;
   const [value, setValue] = useState([initialStartDate, initialEndDate]);
-
-  useEffect(() => {
-    fetchUnits();
-  }, [searchParams]);
 
   const [maxPrice, setMaxPrice] = useState("");
   const [selectedPropFacs, setSelectedPropFacs] = useState([]);
@@ -39,6 +31,10 @@ const SearchWithfilter = () => {
   const { data: unitFacilities } = useFetch(
     "http://localhost:8080/api/unit-fascilities",
   );
+
+  useEffect(() => {
+    fetchUnits();
+  }, [searchParams]);
 
   const handlePropFacToggle = (id) => {
     setSelectedPropFacs((prev) =>
@@ -74,9 +70,9 @@ const SearchWithfilter = () => {
     if (qMaxPrice) url += `&maxPrice=${qMaxPrice}`;
     if (qPropFacs) url += `&propertyFacilities=${qPropFacs}`;
     if (qUnitFacs) url += `&unitFacilities=${qUnitFacs}`;
+
     try {
       const token = localStorage.getItem("jwtToken");
-
       const response = await fetch(url, {
         method: "GET",
         headers: {
@@ -114,105 +110,131 @@ const SearchWithfilter = () => {
   };
 
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit}>
-        <div className="input-container">
-          <input
-            type="text"
-            name="city"
-            id="city"
-            placeholder="Search for city"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
-        </div>
-        <div className="input-container">
-          <input
-            type="text"
-            name="country"
-            id="country"
-            placeholder="Search for country"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-          />
-        </div>
+    <div className="page-wrapper">
+      <div className="layout-container">
+        <aside className="sidebar">
+          <form onSubmit={handleSubmit} className="search-form">
+            <div className="search-box">
+              <h3>Search</h3>
 
-        <div className="input-container">
-          <DatePickerInput
-            valueFormat="YYYY MMMM DD"
-            type="range"
-            placeholder="Choose a date range"
-            value={value}
-            onChange={handleDateChange}
-          />
-        </div>
-
-        <div className="input-container">
-          <GuestDropdown
-            adults={adults}
-            setAdults={setAdults}
-            kids={kids}
-            setKids={setKids}
-          />
-        </div>
-
-        <div className="input-container">
-          <p>Max Price</p>
-          <input
-            type="number"
-            placeholder="Enter max price"
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(e.target.value)}
-            min="0"
-            step="0.01"
-          />
-        </div>
-
-        <div className="input-container">
-          <button>Search</button>
-        </div>
-
-        <div className="checkbox-section">
-          <p>Property Facilities</p>
-          <div className="checkbox-grid">
-            {propFacilities?.map((fac) => (
-              <label key={`prop-${fac.id}`} className="checkbox-label">
+              <div className="input-group">
+                <label>Destination / City</label>
                 <input
-                  type="checkbox"
-                  checked={selectedPropFacs.includes(fac.id)}
-                  onChange={() => handlePropFacToggle(fac.id)}
+                  type="text"
+                  placeholder="Where are you going?"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
                 />
-                {fac.name}
-              </label>
+              </div>
+
+              <div className="input-group">
+                <label>Country</label>
+                <input
+                  type="text"
+                  placeholder="Country"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                />
+              </div>
+
+              <div className="input-group">
+                <label>Check-in / Check-out</label>
+                <DatePickerInput
+                  valueFormat="YYYY MMMM DD"
+                  type="range"
+                  placeholder="Choose dates"
+                  value={value}
+                  onChange={handleDateChange}
+                  className="date-picker-custom"
+                />
+              </div>
+
+              <div className="input-group">
+                <label>Guests</label>
+                <GuestDropdown
+                  adults={adults}
+                  setAdults={setAdults}
+                  kids={kids}
+                  setKids={setKids}
+                />
+              </div>
+
+              <div className="input-group">
+                <label>Max Price</label>
+                <input
+                  type="number"
+                  placeholder="Set max budget"
+                  value={maxPrice}
+                  onChange={(e) => setMaxPrice(e.target.value)}
+                  min="0"
+                  step="0.01"
+                />
+              </div>
+
+              <button type="submit" className="search-btn">
+                Search
+              </button>
+            </div>
+
+            <div className="filter-box">
+              <h3>Filter by:</h3>
+              <div className="filter-section">
+                <p className="filter-title">Property Facilities</p>
+                <div className="checkbox-list">
+                  {propFacilities?.map((fac) => (
+                    <label key={`prop-${fac.id}`} className="checkbox-label">
+                      <input
+                        type="checkbox"
+                        checked={selectedPropFacs.includes(fac.id)}
+                        onChange={() => handlePropFacToggle(fac.id)}
+                      />
+                      <span className="checkmark"></span>
+                      {fac.name}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="filter-section">
+                <p className="filter-title">Unit Facilities</p>
+                <div className="checkbox-list">
+                  {unitFacilities?.map((fac) => (
+                    <label key={`unit-${fac.id}`} className="checkbox-label">
+                      <input
+                        type="checkbox"
+                        checked={selectedUnitFacs.includes(fac.id)}
+                        onChange={() => handleUnitFacToggle(fac.id)}
+                      />
+                      <span className="checkmark"></span>
+                      {fac.name}
+                    </label>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </form>
+        </aside>
+
+        <main className="results-content">
+          <div className="results-header">
+            <h2>
+              {units
+                ? `${units.length} properties found`
+                : "Searching properties..."}
+            </h2>
+          </div>
+
+          <div className="units-list">
+            {units?.map((unit) => (
+              <BookableUnitCard
+                key={unit.unitId}
+                bookableUnit={unit}
+                checkIn={value[0]}
+                checkOut={value[1]}
+              />
             ))}
           </div>
-        </div>
-
-        {/* <div className="checkbox-section">
-          <p>Unit Facilities</p>
-          <div className="checkbox-grid">
-            {unitFacilities?.map((fac) => (
-              <label key={`unit-${fac.id}`} className="checkbox-label">
-                <input
-                  type="checkbox"
-                  checked={selectedUnitFacs.includes(fac.id)}
-                  onChange={() => handleUnitFacToggle(fac.id)}
-                />
-                {fac.name}
-              </label>
-            ))}
-          </div>
-        </div> */}
-      </form>
-
-      <div className="property-list">
-        <div className="input-container"></div>
-        <h2>Found units:</h2>
-      </div>
-      <div className="units-list">
-        {units?.map((unit) => (
-          <BookableUnitCard key={unit.unitId} bookableUnit={unit} />
-        ))}
+        </main>
       </div>
     </div>
   );

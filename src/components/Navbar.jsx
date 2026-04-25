@@ -20,9 +20,12 @@ const Navbar = () => {
         <Link to="/search">
           <li>Search</li>
         </Link>
-        <Link to="/profile">
-          <li>Profile</li>
-        </Link>
+        {isAuthenticated && (
+          <Link to="/profile">
+            <li>Profile</li>
+          </Link>
+        )}
+
         {isOwner && (
           <Link to="/list-properties">
             <li>List your properties</li>
