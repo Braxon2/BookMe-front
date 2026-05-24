@@ -1,39 +1,87 @@
 import { Calendar, DatePickerInput } from "@mantine/dates";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./styles/AddPeriodPriceUnit.css";
 import usePost from "../hooks/usePost";
 import { useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import dayjs from "dayjs";
-import { Text } from "@mantine/core";
-const AddPeriodPriceUnit = () => {
-  const { unitId } = useParams();
+import { Text, Button } from "@mantine/core";
+import { useToggle } from "@mantine/hooks";
+
+const AddPeriodPriceAddon = () => {
+  const { unitId, addonId } = useParams();
+
   const [value, setValue] = useState([null, null]);
   const [price, setPrice] = useState(0.0);
-  const [season, setSeason] = useState("");
+
+  const [perNight, togglePerNight] = useToggle([false, true]);
+
+  const [isToggling, setIsToggling] = useState(false);
 
   const { data: priceDates } = useFetch(
-    unitId ? `http://localhost:8080/api/units/${unitId}/period-prices` : null,
+    unitId
+      ? `http://localhost:8080/api/units/${unitId}/addons/${addonId}/period-prices`
+      : null,
   );
 
+  const { data, post } = usePost();
+
   const periodPriceToAdd = {
-    pricePerNight: price,
+    price,
     startDate: value[0],
     endDate: value[1],
-    season,
   };
 
-  const { data, post } = usePost();
   const handleDateChange = (dates) => {
     setValue(dates);
   };
 
   const handleSubmit = async () => {
     await post(
-      `http://localhost:8080/api/units/${unitId}/add-price`,
+      `http://localhost:8080/api/units/${unitId}/addons/${addonId}/add-price`,
       periodPriceToAdd,
     );
   };
+
+  const handleTogglePerNight = async () => {
+    setIsToggling(true);
+    const nextValue = !perNight;
+
+    try {
+      const res = await fetch(
+        `http://localhost:8080/api/units/${unitId}/addons/${addonId}/billing-type`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            isPerNight: nextValue,
+          }),
+        },
+      );
+
+      if (res.ok) {
+        togglePerNight();
+      } else {
+        console.error("Failed to update billing type");
+      }
+    } catch (error) {
+      console.error("Error updating billing type:", error);
+    } finally {
+      setIsToggling(false);
+    }
+  };
+
+  useEffect(() => {
+    if (priceDates && priceDates.length > 0) {
+      togglePerNight(Boolean(priceDates[0].isPerNight));
+    } else if (priceDates && priceDates.length === 0) {
+      togglePerNight(false);
+    }
+  }, [priceDates, togglePerNight]);
+
   return (
     <div className="page-prices">
       <div className="price-layout">
@@ -45,6 +93,24 @@ const AddPeriodPriceUnit = () => {
           minDate={new Date()}
           onChange={handleDateChange}
         />
+
+        <div
+          className="billing-toggle-container"
+          style={{ margin: "10px 0", display: "flex", alignItems: "center" }}
+        >
+          <label style={{ marginRight: "10px", fontWeight: "bold" }}>
+            Billing Type:
+          </label>
+          <Button
+            onClick={handleTogglePerNight}
+            loading={isToggling}
+            color={perNight ? "green" : "blue"}
+            variant="filled"
+          >
+            {perNight ? "Per Night" : "Per Stay / Flat Rate"}
+          </Button>
+        </div>
+
         <label htmlFor="price">
           Price:
           <input
@@ -55,24 +121,16 @@ const AddPeriodPriceUnit = () => {
             name="price"
             onChange={(e) => setPrice(parseFloat(e.target.value))}
           />
-          Season:
-          <input
-            type="text"
-            value={season}
-            id="season"
-            name="season"
-            onChange={(e) => setSeason(e.target.value)}
-          />
         </label>
+
         <button onClick={handleSubmit}>Add price</button>
+
         <div className="available-prices">
           <h2>Available prices</h2>
           <Calendar
             static
             renderDay={(date) => {
               const currentDate = dayjs(date);
-
-              const dateStr = dayjs(date).format("YYYY-MM-DD");
 
               const priceForDate = priceDates?.findLast((p) => {
                 return (
@@ -93,7 +151,7 @@ const AddPeriodPriceUnit = () => {
                       fw={"700"}
                       style={{ fontSize: "8px" }}
                     >
-                      ${priceForDate.pricePerNight}
+                      ${priceForDate.pricePerNight || priceForDate.price}
                     </Text>
                   )}
                 </div>
@@ -106,4 +164,4 @@ const AddPeriodPriceUnit = () => {
   );
 };
 
-export default AddPeriodPriceUnit;
+export default AddPeriodPriceAddon;

@@ -4,6 +4,6 @@
 
 .units-list {
   margin: 0 auto;
-  border: 2px dashed black;
+  /* border: 2px dashed black; */
   max-width: 800px;
 }

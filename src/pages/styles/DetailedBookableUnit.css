@@ -32,3 +32,13 @@
   background-color: rgb(58, 58, 206);
   color: white;
 }
+
+.total-price {
+  font-size: 1.5rem;
+}
+
+.grid-of-addons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}

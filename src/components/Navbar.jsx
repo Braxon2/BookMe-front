@@ -20,7 +20,7 @@ const Navbar = () => {
         <Link to="/search">
           <li>Search</li>
         </Link>
-        {isAuthenticated && (
+        {isAuthenticated && !isAdmin && (
           <Link to="/profile">
             <li>Profile</li>
           </Link>

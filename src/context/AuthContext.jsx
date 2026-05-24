@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
       const json = await res.json();
 
       if (!res.ok) {
-        throw new Error(json.error || "Login failed");
+        throw new Error(json.message || "Login failed");
       }
 
       localStorage.setItem("jwtToken", json.token);

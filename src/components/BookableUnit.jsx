@@ -7,17 +7,27 @@ const BookableUnit = ({ bookableUnit }) => {
   const doubleBeds = bookableUnit.doubleBeds;
   const singleBeds = bookableUnit.singleBeds;
 
+  const unitFacilities = bookableUnit.unitFascilityResponseDTOS;
+
   const unitId = bookableUnit.id;
 
   const navigateToUnitFacilities = (e) => {
     e.preventDefault();
-    navigate(`/units/${unitId}/unit-fascilities`);
+    navigate(`/units/${unitId}/unit-fascilities`, {
+      state: { unitFacilities: unitFacilities },
+    });
   };
 
   const navigateToPeriodPrice = (e) => {
     e.preventDefault();
     navigate(`/units/${unitId}/add-price`);
   };
+
+  const navigateToAddons = (e) => {
+    e.preventDefault();
+    navigate(`/units/${unitId}/addons`);
+  };
+
   return (
     <div className="unit-card">
       <div className="unit-image">
@@ -47,6 +57,7 @@ const BookableUnit = ({ bookableUnit }) => {
           <button>Add Image</button>
           <button onClick={navigateToUnitFacilities}>Add Unit fasility</button>
           <button onClick={navigateToPeriodPrice}>Add period price</button>
+          <button onClick={navigateToAddons}>Addons</button>
         </div>
       </div>
     </div>

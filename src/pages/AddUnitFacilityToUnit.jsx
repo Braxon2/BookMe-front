@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 import "./styles/ListingFascilities.css";
 import usePost from "../hooks/usePost";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 const AddUnitFacilityToUnit = () => {
   const { data } = useFetch("http://localhost:8080/api/unit-fascilities");
   const [unitFacilities, setUnitFacilities] = useState([]);
@@ -11,6 +11,9 @@ const AddUnitFacilityToUnit = () => {
   const { error, post } = usePost();
 
   const { unitId } = useParams();
+
+  const { data: unit } = useFetch(`http://localhost:8080/api/units/${unitId}`);
+  const faciltiesFromUnit = unit?.unitFascilityDTO;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,13 +24,7 @@ const AddUnitFacilityToUnit = () => {
         facilityIds: selectedFacilties,
       },
     );
-
-    console.log(unitFacilities);
   };
-
-  {
-    unitFacilities?.map((unitFacility) => console.log(unitFacility.name));
-  }
 
   const handleSelectedBox = (checked, id) => {
     if (checked) {
@@ -41,7 +38,11 @@ const AddUnitFacilityToUnit = () => {
     if (data) {
       setUnitFacilities(data);
     }
-  }, [data]);
+    if (faciltiesFromUnit) {
+      const existingIds = faciltiesFromUnit.map((facility) => facility.id);
+      setSelectedFacilties(existingIds);
+    }
+  }, [data, faciltiesFromUnit]);
 
   return (
     <div className="page-fascility">
@@ -51,6 +52,7 @@ const AddUnitFacilityToUnit = () => {
             <label key={unitFacility.id} className="facility-item">
               <input
                 type="checkbox"
+                checked={selectedFacilties.includes(unitFacility.id)}
                 onChange={(e) =>
                   handleSelectedBox(e.target.checked, unitFacility.id)
                 }

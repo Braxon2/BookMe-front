@@ -23,7 +23,7 @@ const SearchWithfilter = () => {
   const [maxPrice, setMaxPrice] = useState("");
   const [selectedPropFacs, setSelectedPropFacs] = useState([]);
   const [selectedUnitFacs, setSelectedUnitFacs] = useState([]);
-  const [units, setUnits] = useState(null);
+  const [units, setUnits] = useState([]);
 
   const { data: propFacilities } = useFetch(
     "http://localhost:8080/api/fascilities",

@@ -10,7 +10,7 @@
 
 .search-form {
   width: 100%;
-  max-width: 600px;
+  max-width: 400px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -23,6 +23,11 @@
 }
 
 .search-form input {
+  width: 100%;
   padding: 8px;
   font-size: 1rem;
+}
+
+.search-form .datepicker {
+  width: 100%;
 }

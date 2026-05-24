@@ -17,6 +17,9 @@ import AddPeriodPriceUnit from "./pages/AddPeriodPriceUnit";
 import SearchWithfilter from "./pages/SearchWithFilters";
 import DetailedBookableUnit from "./pages/DetailedBookableUnit";
 import UserProfile from "./pages/UserProfile";
+import AddAddon from "./pages/AddAddon";
+import AddAddonToUnit from "./pages/AddAddonToUnit";
+import AddPeriodPriceAddon from "./pages/AddPeriodpriceAddon";
 function App() {
   return (
     <BrowserRouter>
@@ -57,6 +60,14 @@ function App() {
           path="/units/:unitId/add-price"
           element={<AddPeriodPriceUnit />}
         />
+
+        <Route path="/units/:unitId/addons" element={<AddAddonToUnit />} />
+        <Route
+          path="/units/:unitId/addons/:addonId"
+          element={<AddPeriodPriceAddon />}
+        />
+
+        <Route path="/addons" element={<AddAddon />} />
 
         <Route path="/profile" element={<UserProfile />} />
       </Routes>

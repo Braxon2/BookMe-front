@@ -63,6 +63,7 @@ const Search = () => {
         />
 
         <DatePickerInput
+          className="datepicker"
           valueFormat="YYYY MMMM DD"
           type="range"
           placeholder="Choose a date range"
